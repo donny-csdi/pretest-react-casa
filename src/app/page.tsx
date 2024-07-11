@@ -33,7 +33,17 @@ export default function Home() {
   };
 
   const markValue = (id: number) => {
-    // setTodoList(todoList.map(ite))
+    setTodoList(
+      todoList.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            check: !item.check,
+          };
+        }
+        return item;
+      })
+    );
   };
   return (
     <main className={styles.main}>
@@ -64,7 +74,12 @@ export default function Home() {
                 >
                   🗑️
                 </div>
-                <div className={styles.check}>✅</div>
+                <div
+                  className={styles.check}
+                  onClick={() => markValue(items.id)}
+                >
+                  ✅{items.check && "Checked"}
+                </div>
               </div>
             ))}
           </div>
